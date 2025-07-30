@@ -4,13 +4,25 @@
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 [![Version](https://img.shields.io/badge/Version-1.0.0-orange.svg)](https://github.com/RandomCoderTinker/php-keccak256/releases)
 
-A lightweight PHP extension that provides Keccak-256 hashing (also known as SHA-3-256) with minimal overhead. Ideal when you only need the core 256-bit Keccak hash without the extra functionality of larger libraries.
+A lightweight PHP extension that provides **Ethereum-compatible Keccak-256** hashing (padding suffix `0x01`) with minimal overhead.  
+_This is **not** the NIST SHA3-256 (`0x06`) variant. Use `hash('sha3-256', …)` for standard SHA3-256._
+
+---
 
 ## Features
 
-- **Keccak-256 only**: No other ciphers or hash sizes.
-- **Raw or hex output**: Choose binary output or 64-character hexadecimal string.
-- **Blazing fast**: C wrapper outperforms pure-PHP implementations by an order of magnitude.
+- **Keccak-256 only** (Ethereum style, `0x01` padding)  
+- **Raw or hex output**: 32-byte binary blob or 64-character hex string  
+- **Blazing fast**: C wrapper outperforms pure-PHP implementations by ~17×  
+
+---
+
+## Standards
+
+| Function                              | Padding | Purpose                           |
+|---------------------------------------|:-------:|-----------------------------------|
+| `keccak_hash()` (this extension)      | `0x01`  | Ethereum, smart contracts, dApps  |
+| `hash('sha3-256', …)` (PHP built-in)  | `0x06`  | NIST SHA3-256 standard            |
 
 ## Installation
 
